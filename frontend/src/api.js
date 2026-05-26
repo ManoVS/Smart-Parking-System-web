@@ -1,4 +1,10 @@
-export const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || `${window.location.protocol}//${window.location.hostname}:5000`;
+const explicitApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+export const apiBaseUrl = explicitApiBaseUrl
+  ? explicitApiBaseUrl
+  : isLocalhost
+  ? `${window.location.protocol}//${window.location.hostname}:5000`
+  : '';
 
 export async function fetchLatestTicket() {
   const response = await fetch(`${apiBaseUrl}/api/latest-ticket`);
