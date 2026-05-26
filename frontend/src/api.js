@@ -1,10 +1,13 @@
 const explicitApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+// On localhost use the local backend port. In production, default to the
+// Vercel experimental backend routePrefix `/_/backend` so frontend can
+// call the backend deployed as a Vercel service at `https://<project>/_/backend`.
 export const apiBaseUrl = explicitApiBaseUrl
   ? explicitApiBaseUrl
   : isLocalhost
   ? `${window.location.protocol}//${window.location.hostname}:5000`
-  : '';
+  : `${window.location.origin}/_/backend`;
 
 export async function fetchLatestTicket() {
   const response = await fetch(`${apiBaseUrl}/api/latest-ticket`);
