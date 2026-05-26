@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: smart-parking-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    branch: main
+    repo: https://github.com/ManoVS/Smart-Parking-System-web
+    plan: free
+    autoDeploy: true
